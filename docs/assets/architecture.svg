@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="884" viewBox="0 0 1280 884" role="img" aria-labelledby="t d" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+<title id="t">Agent Radius architecture</title>
+<desc id="d">Inputs (your machine, your AWS account through a read-only gate, or a snapshot file) feed a snapshot. Seven agents on a shared blackboard: Planner, Recon, Permissions and Backup in parallel, Guardrail, the Verifier checkpoint that drops anything that does not reproduce, and Reporter. Outputs: reports and guardrail Terraform that is written, never applied. An optional LLM ranks and explains but cannot create findings.</desc>
+<defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1A1A1F"/></marker>
+<marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#FF8A3D"/></marker>
+<marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6B7280"/></marker>
+</defs>
+<rect x="0.75" y="0.75" width="1278.5" height="882.5" rx="16" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1.5"/>
+<text x="48" y="58" font-size="28" font-weight="700" fill="#1A1A1F">How Agent Radius works</text>
+<text x="48" y="88" font-size="16" fill="#6B7280">Read-only from start to finish. Seven agents share one blackboard, and a Verifier checks every claim before it reaches you.</text>
+<text x="48" y="150" font-size="13" font-weight="700" fill="#6B7280" letter-spacing="1.6">INPUTS</text>
+<rect x="48" y="166" width="232" height="196" rx="12" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1.5"/>
+<text x="66" y="196" font-size="18" font-weight="700" fill="#1A1A1F">Your machine</text>
+<text x="66" y="219" font-size="14" fill="#6B7280">What Recon checks:</text>
+<circle cx="69" cy="239.5" r="2.5" fill="#FF8A3D"/>
+<text x="79" y="244" font-size="14" fill="#1A1A1F">~/.aws config, credentials</text>
+<circle cx="69" cy="260.5" r="2.5" fill="#FF8A3D"/>
+<text x="79" y="265" font-size="14" fill="#1A1A1F">AWS_* variables in the shell</text>
+<circle cx="69" cy="281.5" r="2.5" fill="#FF8A3D"/>
+<text x="79" y="286" font-size="14" fill="#1A1A1F">MCP and agent configs</text>
+<circle cx="69" cy="302.5" r="2.5" fill="#FF8A3D"/>
+<text x="79" y="307" font-size="14" fill="#1A1A1F">gcloud credentials file</text>
+<text x="66" y="334" font-size="13" font-weight="600" fill="#4B5563">Names and paths only,</text>
+<text x="66" y="352" font-size="13" font-weight="600" fill="#4B5563">never secret values.</text>
+<rect x="48" y="384" width="232" height="96" rx="12" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1.5"/>
+<text x="66" y="416" font-size="18" font-weight="700" fill="#1A1A1F">Your AWS account</text>
+<text x="66" y="440" font-size="14" fill="#4B5563">Live scan: 34 read-only</text>
+<text x="66" y="460" font-size="14" fill="#4B5563">Get, List, Describe calls</text>
+<rect x="48" y="498" width="232" height="80" rx="12" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1.5"/>
+<text x="66" y="530" font-size="18" font-weight="700" fill="#1A1A1F">Snapshot file</text>
+<text x="66" y="554" font-size="14" fill="#4B5563">Offline: no AWS calls</text>
+<line x1="280" y1="432" x2="302" y2="432" stroke="#1A1A1F" stroke-width="2"/>
+<line x1="328" y1="432" x2="348" y2="432" stroke="#1A1A1F" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="302" y="428" width="26" height="21" rx="4" fill="#FF8A3D"/>
+<path d="M307.5,428 v-6 a7.5,7.5 0 0 1 15,0 v6" fill="none" stroke="#FF8A3D" stroke-width="3"/>
+<circle cx="315" cy="436.5" r="2.6" fill="#1A1A1F"/>
+<rect x="313.8" y="437" width="2.4" height="6" fill="#1A1A1F"/>
+<text x="315" y="470" font-size="13" font-weight="700" fill="#1A1A1F" text-anchor="middle">read-only</text>
+<text x="315" y="486" font-size="13" font-weight="700" fill="#1A1A1F" text-anchor="middle">gate</text>
+<line x1="280" y1="538" x2="348" y2="538" stroke="#1A1A1F" stroke-width="2" marker-end="url(#ah)"/>
+<path d="M350,396 L350,566 A63,12 0 0 0 476,566 L476,396" fill="#FFF1E7" stroke="#FF8A3D" stroke-width="2"/>
+<ellipse cx="413" cy="396" rx="63" ry="12" fill="#FFE2CC" stroke="#FF8A3D" stroke-width="2"/>
+<text x="413" y="454" font-size="18" font-weight="700" fill="#1A1A1F" text-anchor="middle">Snapshot</text>
+<text x="413" y="476" font-size="13" fill="#6B7280" text-anchor="middle">one AWS account</text>
+<text x="413" y="506" font-size="14" fill="#1A1A1F" text-anchor="middle">IAM policies</text>
+<text x="413" y="527" font-size="14" fill="#1A1A1F" text-anchor="middle">resources</text>
+<text x="413" y="548" font-size="14" fill="#1A1A1F" text-anchor="middle">backups</text>
+<rect x="500" y="128" width="480" height="684" rx="18" fill="#FFF1E7" stroke="#FF8A3D" stroke-width="1.5"/>
+<text x="522" y="158" font-size="13" font-weight="700" fill="#1A1A1F" letter-spacing="1.6">SHARED BLACKBOARD</text>
+<text x="522" y="180" font-size="14" fill="#4B5563">Agents read from it and post findings with evidence.</text>
+<line x1="476" y1="450" x2="498" y2="450" stroke="#1A1A1F" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="522" y="198" width="436" height="58" rx="10" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1.5"/>
+<rect x="522" y="208" width="5" height="38" rx="2.5" fill="#FF8A3D"/>
+<text x="544" y="224" font-size="17" font-weight="700" fill="#1A1A1F">Planner</text>
+<text x="544" y="246" font-size="15" fill="#4B5563">Decides the order: production resources first.</text>
+<rect x="522" y="274" width="436" height="58" rx="10" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1.5"/>
+<rect x="522" y="284" width="5" height="38" rx="2.5" fill="#FF8A3D"/>
+<text x="544" y="300" font-size="17" font-weight="700" fill="#1A1A1F">Recon</text>
+<text x="544" y="322" font-size="15" fill="#4B5563">Finds the credentials an agent would inherit.</text>
+<rect x="522" y="352" width="211" height="88" rx="10" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1.5"/>
+<rect x="522" y="362" width="5" height="68" rx="2.5" fill="#FF8A3D"/>
+<text x="544" y="378" font-size="17" font-weight="700" fill="#1A1A1F">Permissions</text>
+<text x="544" y="400" font-size="15" fill="#4B5563">Tests 66 destructive</text>
+<text x="544" y="419" font-size="15" fill="#4B5563">actions per resource.</text>
+<rect x="747" y="352" width="211" height="88" rx="10" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1.5"/>
+<rect x="747" y="362" width="5" height="68" rx="2.5" fill="#FF8A3D"/>
+<text x="769" y="378" font-size="17" font-weight="700" fill="#1A1A1F">Backup</text>
+<text x="769" y="400" font-size="15" fill="#4B5563">Asks whether every</text>
+<text x="769" y="419" font-size="15" fill="#4B5563">backup copy survives.</text>
+<rect x="522" y="460" width="436" height="58" rx="10" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1.5"/>
+<rect x="522" y="470" width="5" height="38" rx="2.5" fill="#FF8A3D"/>
+<text x="544" y="486" font-size="17" font-weight="700" fill="#1A1A1F">Guardrail</text>
+<text x="544" y="508" font-size="15" fill="#4B5563">Writes Terraform to close the gap. Never applies it.</text>
+<rect x="522" y="668" width="436" height="58" rx="10" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1.5"/>
+<rect x="522" y="678" width="5" height="38" rx="2.5" fill="#FF8A3D"/>
+<text x="544" y="694" font-size="17" font-weight="700" fill="#1A1A1F">Reporter</text>
+<text x="544" y="716" font-size="15" fill="#4B5563">Ranks what is left and writes the reports.</text>
+<rect x="522" y="538" width="436" height="110" rx="10" fill="#1A1A1F"/>
+<rect x="522" y="538" width="9" height="110" rx="3" fill="#FF8A3D"/>
+<rect x="949" y="538" width="9" height="110" rx="3" fill="#FF8A3D"/>
+<text x="548" y="566" font-size="17" font-weight="700" fill="#FFFFFF">Verifier</text>
+<text x="936" y="565" font-size="12" font-weight="700" fill="#F5C16C" text-anchor="end" letter-spacing="1.6">CHECKPOINT</text>
+<text x="548" y="590" font-size="15" fill="#E5E7EB">Re-checks every claim against the snapshot.</text>
+<text x="548" y="610" font-size="15" fill="#E5E7EB">Tests what the deny policy would block.</text>
+<text x="548" y="633" font-size="15" font-weight="700" fill="#F5C16C">Drops anything that does not reproduce.</text>
+<line x1="740" y1="256" x2="740" y2="273" stroke="#1A1A1F" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="627.5" y1="332" x2="627.5" y2="351" stroke="#1A1A1F" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="852.5" y1="332" x2="852.5" y2="351" stroke="#1A1A1F" stroke-width="2" marker-end="url(#ah)"/>
+<text x="740" y="347" font-size="12.5" font-weight="600" fill="#6B7280" text-anchor="middle">in parallel</text>
+<line x1="627.5" y1="440" x2="627.5" y2="459" stroke="#1A1A1F" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="852.5" y1="440" x2="852.5" y2="459" stroke="#1A1A1F" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="740" y1="518" x2="740" y2="537" stroke="#1A1A1F" stroke-width="2" marker-end="url(#ah)"/>
+<line x1="740" y1="648" x2="740" y2="667" stroke="#FF8A3D" stroke-width="2.5" marker-end="url(#ao)"/>
+<text x="752" y="663" font-size="12.5" font-weight="600" fill="#6B7280">verified findings only</text>
+<rect x="522" y="746" width="436" height="48" rx="10" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.2" stroke-dasharray="5 4"/>
+<text x="540" y="766" font-size="14" font-weight="700" fill="#1A1A1F">Shared tool: offline IAM evaluator</text>
+<text x="540" y="785" font-size="13.5" fill="#4B5563">Used by Permissions, Backup and Verifier. No AWS calls.</text>
+<line x1="280" y1="303" x2="521" y2="303" stroke="#1A1A1F" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="48" y="600" width="232" height="64" rx="12" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.3" stroke-dasharray="5 4"/>
+<circle cx="74" cy="632.0" r="11" fill="none" stroke="#6B7280" stroke-width="2"/>
+<path d="M69.5,627.5 L78.5,636.5 M78.5,627.5 L69.5,636.5" stroke="#6B7280" stroke-width="2" stroke-linecap="round"/>
+<text x="96" y="628" font-size="16" font-weight="700" fill="#1A1A1F">Dropped</text>
+<text x="96" y="648" font-size="13" fill="#4B5563">listed in report.json</text>
+<line x1="522" y1="632" x2="281" y2="632" stroke="#6B7280" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#am)"/>
+<text x="410" y="622" font-size="12.5" font-weight="600" fill="#6B7280" text-anchor="middle">with the reason</text>
+<text x="1024" y="420" font-size="13" font-weight="700" fill="#6B7280" letter-spacing="1.6">OUTPUTS</text>
+<rect x="1024" y="166" width="208" height="148" rx="12" fill="#FFFFFF" stroke="#6B7280" stroke-width="1.3" stroke-dasharray="6 5"/>
+<text x="1040" y="194" font-size="16" font-weight="700" fill="#1A1A1F">Optional LLM</text>
+<text x="1040" y="218" font-size="14" fill="#1A1A1F">optional: ranks and</text>
+<text x="1040" y="237" font-size="14" fill="#1A1A1F">explains, cannot</text>
+<text x="1040" y="256" font-size="14" fill="#1A1A1F">create findings</text>
+<text x="1040" y="284" font-size="13" fill="#6B7280">Planner and Reporter</text>
+<text x="1040" y="301" font-size="13" fill="#6B7280">only. Off by default.</text>
+<line x1="1024" y1="227" x2="959" y2="227" stroke="#6B7280" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#am)"/>
+<rect x="1024" y="436" width="208" height="106" rx="12" fill="#FFFFFF" stroke="#1A1A1F" stroke-width="1.5"/>
+<text x="1040" y="466" font-size="15" font-weight="700" fill="#1A1A1F" font-family="SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace">guardrails/*.tf</text>
+<text x="1040" y="490" font-size="14" fill="#4B5563">Terraform to review.</text>
+<text x="1040" y="512" font-size="14" font-weight="700" fill="#1A1A1F">Written, never</text>
+<text x="1040" y="530" font-size="14" font-weight="700" fill="#1A1A1F">applied.</text>
+<line x1="958" y1="489" x2="1023" y2="489" stroke="#1A1A1F" stroke-width="2" marker-end="url(#ah)"/>
+<rect x="1024" y="626" width="208" height="142" rx="12" fill="#FFFFFF" stroke="#1A1A1F" stroke-width="1.5"/>
+<text x="1040" y="656" font-size="15" font-weight="700" fill="#1A1A1F" font-family="SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace">report.md</text>
+<text x="1040" y="678" font-size="15" font-weight="700" fill="#1A1A1F" font-family="SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace">report.html</text>
+<text x="1040" y="700" font-size="15" font-weight="700" fill="#1A1A1F" font-family="SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace">report.json</text>
+<text x="1040" y="732" font-size="13" fill="#4B5563">Ranked findings with</text>
+<text x="1040" y="750" font-size="13" fill="#4B5563">evidence and a trace</text>
+<line x1="958" y1="697" x2="1023" y2="697" stroke="#1A1A1F" stroke-width="2" marker-end="url(#ah)"/>
+<text x="48" y="852" font-size="14" fill="#6B7280">Every finding must cite evidence: a policy statement id, a resource ARN or a credential id. The blackboard refuses a finding without it.</text>
+</svg>

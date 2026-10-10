@@ -1,0 +1,26 @@
+{
+  "description": "An SCP denies rds:Delete* for the whole organization.",
+  "expect": [
+    {
+      "kind": "destructive_permission",
+      "action": "dynamodb:DeleteTable",
+      "resource": "arn:aws:dynamodb:us-east-1:111122223333:table/orders-prod",
+      "outcome": "ALLOW"
+    },
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:rds:us-east-1:111122223333:db:prod-db",
+      "verdict": "SURVIVES"
+    }
+  ],
+  "must_not": [
+    {
+      "kind": "destructive_permission",
+      "action": "rds:DeleteDBInstance"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "rds:DeleteDBSnapshot"
+    }
+  ]
+}

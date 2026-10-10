@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="802" viewBox="0 0 1280 802" role="img" aria-labelledby="t d" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+<title id="t">Agent Radius in six steps</title>
+<desc id="d">1 Find the credentials an agent would inherit. 2 Check 66 destructive actions against every resource. 3 Check every backup copy. 4 Write the guardrail Terraform. 5 Verify every claim. 6 Report.</desc>
+<rect x="0.75" y="0.75" width="1278.5" height="800.5" rx="16" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1.5"/>
+<text x="48" y="58" font-size="28" font-weight="700" fill="#1A1A1F">One scan, six steps</text>
+<text x="48" y="88" font-size="16" fill="#6B7280">Read-only from start to finish. Nothing in your AWS account changes.</text>
+<line x1="106" y1="216" x2="106" y2="234" stroke="#FF8A3D" stroke-width="3"/>
+<rect x="48" y="124" width="1184" height="92" rx="14" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1.5"/>
+<circle cx="106" cy="170.0" r="28" fill="#FF8A3D"/>
+<text x="106" y="179.5" font-size="27" font-weight="800" fill="#1A1A1F" text-anchor="middle">1</text>
+<rect x="1077.31" y="154" width="124.686" height="32" rx="16" fill="#FFF1E7" stroke="#FF8A3D" stroke-width="1.2"/>
+<text x="1139.66" y="175" font-size="14" font-weight="700" fill="#1A1A1F" text-anchor="middle">Recon agent</text>
+<text x="164" y="164" font-size="22" font-weight="700" fill="#1A1A1F">Find the credentials an agent would inherit</text>
+<text x="164" y="192" font-size="16" fill="#4B5563">AWS profiles, AWS_* variables, MCP and agent configs. Names and paths only, never secret values.</text>
+<line x1="106" y1="326" x2="106" y2="344" stroke="#FF8A3D" stroke-width="3"/>
+<rect x="48" y="234" width="1184" height="92" rx="14" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1.5"/>
+<circle cx="106" cy="280.0" r="28" fill="#FF8A3D"/>
+<text x="106" y="289.5" font-size="27" font-weight="800" fill="#1A1A1F" text-anchor="middle">2</text>
+<rect x="1033.59" y="264" width="168.409" height="32" rx="16" fill="#FFF1E7" stroke="#FF8A3D" stroke-width="1.2"/>
+<text x="1117.8" y="285" font-size="14" font-weight="700" fill="#1A1A1F" text-anchor="middle">Permissions agent</text>
+<text x="164" y="274" font-size="22" font-weight="700" fill="#1A1A1F">Check 66 destructive actions against every resource</text>
+<text x="164" y="302" font-size="16" fill="#4B5563">Deletes of databases, buckets, tables, volumes, keys, vaults, IAM, audit logs, DNS and more.</text>
+<line x1="106" y1="436" x2="106" y2="454" stroke="#FF8A3D" stroke-width="3"/>
+<rect x="48" y="344" width="1184" height="92" rx="14" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1.5"/>
+<circle cx="106" cy="390.0" r="28" fill="#FF8A3D"/>
+<text x="106" y="399.5" font-size="27" font-weight="800" fill="#1A1A1F" text-anchor="middle">3</text>
+<rect x="1068.91" y="374" width="133.09" height="32" rx="16" fill="#FFF1E7" stroke="#FF8A3D" stroke-width="1.2"/>
+<text x="1135.45" y="395" font-size="14" font-weight="700" fill="#1A1A1F" text-anchor="middle">Backup agent</text>
+<text x="164" y="384" font-size="22" font-weight="700" fill="#1A1A1F">Check every backup copy</text>
+<text x="164" y="412" font-size="16" fill="#4B5563">Snapshots, recovery points, versions and replicas. Each resource gets SURVIVES, PARTIAL or AT_RISK.</text>
+<line x1="106" y1="546" x2="106" y2="564" stroke="#FF8A3D" stroke-width="3"/>
+<rect x="48" y="454" width="1184" height="92" rx="14" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1.5"/>
+<circle cx="106" cy="500.0" r="28" fill="#FF8A3D"/>
+<text x="106" y="509.5" font-size="27" font-weight="800" fill="#1A1A1F" text-anchor="middle">4</text>
+<rect x="1056.29" y="484" width="145.713" height="32" rx="16" fill="#FFF1E7" stroke="#FF8A3D" stroke-width="1.2"/>
+<text x="1129.14" y="505" font-size="14" font-weight="700" fill="#1A1A1F" text-anchor="middle">Guardrail agent</text>
+<text x="164" y="494" font-size="22" font-weight="700" fill="#1A1A1F">Write the guardrail Terraform</text>
+<text x="164" y="522" font-size="16" fill="#4B5563">An agent-only role, a deny policy and a locked backup vault. Written for review, never applied.</text>
+<line x1="106" y1="656" x2="106" y2="674" stroke="#FF8A3D" stroke-width="3"/>
+<rect x="48" y="564" width="1184" height="92" rx="14" fill="#1A1A1F"/>
+<rect x="58" y="578" width="6" height="64" rx="3" fill="#FF8A3D"/>
+<rect x="1216" y="578" width="6" height="64" rx="3" fill="#FF8A3D"/>
+<circle cx="106" cy="610.0" r="28" fill="#FF8A3D"/>
+<text x="106" y="619.5" font-size="27" font-weight="800" fill="#1A1A1F" text-anchor="middle">5</text>
+<rect x="1072.22" y="594" width="129.783" height="32" rx="16" fill="none" stroke="#F5C16C" stroke-width="1.3"/>
+<text x="1137.11" y="615" font-size="14" font-weight="700" fill="#F5C16C" text-anchor="middle">Verifier agent</text>
+<text x="164" y="604" font-size="22" font-weight="700" fill="#FFFFFF">Verify every claim</text>
+<text x="164" y="632" font-size="16" fill="#F5C16C">Each finding is re-derived from the snapshot. Anything that does not reproduce is dropped.</text>
+<rect x="48" y="674" width="1184" height="92" rx="14" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1.5"/>
+<circle cx="106" cy="720.0" r="28" fill="#FF8A3D"/>
+<text x="106" y="729.5" font-size="27" font-weight="800" fill="#1A1A1F" text-anchor="middle">6</text>
+<rect x="1060.51" y="704" width="141.494" height="32" rx="16" fill="#FFF1E7" stroke="#FF8A3D" stroke-width="1.2"/>
+<text x="1131.25" y="725" font-size="14" font-weight="700" fill="#1A1A1F" text-anchor="middle">Reporter agent</text>
+<text x="164" y="714" font-size="22" font-weight="700" fill="#1A1A1F">Report</text>
+<text x="164" y="742" font-size="16" fill="#4B5563">report.md, report.html and report.json, ranked by how irreversible each action is.</text>
+</svg>

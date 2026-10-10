@@ -1,0 +1,34 @@
+{
+  "description": "S3 with Object Lock in compliance mode: objects survive even an s3:* agent.",
+  "expect": [
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:s3:::acme-prod-ledger",
+      "verdict": "SURVIVES"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "s3:DeleteObjectVersion",
+      "resource": "arn:aws:s3:::acme-prod-ledger/*",
+      "effective": false
+    },
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:s3:::acme-prod-scratch",
+      "verdict": "AT_RISK"
+    }
+  ],
+  "must_not": [
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:s3:::acme-prod-ledger",
+      "verdict": "AT_RISK"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "s3:DeleteObjectVersion",
+      "resource": "arn:aws:s3:::acme-prod-ledger/*",
+      "effective": true
+    }
+  ]
+}

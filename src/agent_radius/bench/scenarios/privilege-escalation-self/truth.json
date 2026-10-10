@@ -1,0 +1,28 @@
+{
+  "description": "No delete rights today, but the agent can attach any policy to its own role.",
+  "expect": [
+    {
+      "kind": "destructive_permission",
+      "action": "iam:AttachRolePolicy",
+      "resource": "arn:aws:iam::111122223333:role/agent-escalate",
+      "outcome": "ALLOW",
+      "severity": "high"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "iam:PutRolePolicy",
+      "resource": "arn:aws:iam::111122223333:role/agent-escalate",
+      "outcome": "ALLOW"
+    }
+  ],
+  "must_not": [
+    {
+      "kind": "destructive_permission",
+      "action": "rds:DeleteDBInstance"
+    },
+    {
+      "kind": "destructive_permission",
+      "resource_contains": "role/prod-app"
+    }
+  ]
+}

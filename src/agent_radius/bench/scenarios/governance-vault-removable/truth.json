@@ -1,0 +1,23 @@
+{
+  "description": "A governance-mode vault lock looks protective, but an admin agent can remove it and then delete.",
+  "expect": [
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:rds:us-east-1:111122223333:db:prod-db",
+      "verdict": "AT_RISK"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "backup:DeleteBackupVaultLockConfiguration",
+      "resource": "arn:aws:backup:us-east-1:111122223333:backup-vault:gov-vault",
+      "outcome": "ALLOW"
+    }
+  ],
+  "must_not": [
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:rds:us-east-1:111122223333:db:prod-db",
+      "verdict": "SURVIVES"
+    }
+  ]
+}

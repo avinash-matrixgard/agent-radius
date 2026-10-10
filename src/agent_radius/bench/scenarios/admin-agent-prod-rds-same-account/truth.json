@@ -1,0 +1,62 @@
+{
+  "description": "The agent's profile assumes a role with AdministratorAccess; prod RDS backups all live in the same account.",
+  "expect": [
+    {
+      "kind": "destructive_permission",
+      "action": "rds:DeleteDBInstance",
+      "resource": "arn:aws:rds:us-east-1:111122223333:db:prod-db",
+      "outcome": "ALLOW",
+      "severity": "critical"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "rds:DeleteDBSnapshot",
+      "resource": "arn:aws:rds:us-east-1:111122223333:snapshot:prod-db-before-migration",
+      "outcome": "ALLOW"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "backup:DeleteRecoveryPoint",
+      "resource": "arn:aws:backup:us-east-1:111122223333:recovery-point:prod-db-daily-1",
+      "outcome": "ALLOW"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "kms:ScheduleKeyDeletion",
+      "resource": "arn:aws:kms:us-east-1:111122223333:key/1a2b3c4d-prod-data",
+      "outcome": "ALLOW"
+    },
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:rds:us-east-1:111122223333:db:prod-db",
+      "verdict": "AT_RISK"
+    },
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:dynamodb:us-east-1:111122223333:table/orders-prod",
+      "verdict": "AT_RISK"
+    },
+    {
+      "kind": "local_credential",
+      "source_type": "aws_profile",
+      "principal_contains": "role/claude-code-agent"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "rds:DeleteDBInstance",
+      "resource": "arn:aws:rds:us-east-1:111122223333:db:prod-db",
+      "blocked_by_guardrail": true
+    }
+  ],
+  "must_not": [
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:rds:us-east-1:111122223333:db:prod-db",
+      "verdict": "SURVIVES"
+    },
+    {
+      "kind": "destructive_permission",
+      "principal_contains": "user/nash"
+    }
+  ]
+}

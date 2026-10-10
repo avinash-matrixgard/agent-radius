@@ -1,0 +1,32 @@
+{
+  "description": "Two prod volumes: one snapshotted in the same account, one copied to another account.",
+  "expect": [
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:ec2:us-east-1:111122223333:volume/vol-0aaa1111",
+      "verdict": "AT_RISK"
+    },
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:ec2:us-east-1:111122223333:volume/vol-0bbb2222",
+      "verdict": "SURVIVES"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "ec2:DeleteSnapshot",
+      "resource": "arn:aws:ec2:us-east-1:111122223333:snapshot/snap-0aaa1111",
+      "outcome": "ALLOW"
+    }
+  ],
+  "must_not": [
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:ec2:us-east-1:111122223333:volume/vol-0bbb2222",
+      "verdict": "AT_RISK"
+    },
+    {
+      "kind": "destructive_permission",
+      "resource": "arn:aws:ec2:us-east-1:999988887777:snapshot/snap-0bbb2222"
+    }
+  ]
+}

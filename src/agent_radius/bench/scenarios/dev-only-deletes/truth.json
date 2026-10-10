@@ -1,0 +1,39 @@
+{
+  "description": "Deletes are allowed only on dev-* resources; nothing in prod may be reported.",
+  "expect": [
+    {
+      "kind": "destructive_permission",
+      "action": "rds:DeleteDBInstance",
+      "resource": "arn:aws:rds:us-east-1:111122223333:db:dev-db",
+      "outcome": "ALLOW"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "s3:DeleteObject",
+      "resource": "arn:aws:s3:::dev-assets/*",
+      "outcome": "ALLOW"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "dynamodb:DeleteTable",
+      "resource": "arn:aws:dynamodb:us-east-1:111122223333:table/dev-orders",
+      "outcome": "ALLOW"
+    }
+  ],
+  "must_not": [
+    {
+      "kind": "destructive_permission",
+      "resource_contains": "prod"
+    },
+    {
+      "kind": "backup_survivability",
+      "resource_contains": "prod",
+      "verdict": "AT_RISK"
+    },
+    {
+      "kind": "backup_survivability",
+      "resource_contains": "prod",
+      "verdict": "PARTIAL"
+    }
+  ]
+}

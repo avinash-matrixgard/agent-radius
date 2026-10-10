@@ -1,0 +1,28 @@
+{
+  "description": "DeleteTable is allowed only with MFA: reported as possible, never as certain.",
+  "expect": [
+    {
+      "kind": "destructive_permission",
+      "action": "dynamodb:DeleteTable",
+      "resource": "arn:aws:dynamodb:us-east-1:111122223333:table/orders-prod",
+      "outcome": "CONDITIONAL",
+      "certainty": "possible"
+    },
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:dynamodb:us-east-1:111122223333:table/orders-prod",
+      "verdict": "PARTIAL"
+    }
+  ],
+  "must_not": [
+    {
+      "kind": "destructive_permission",
+      "action": "dynamodb:DeleteTable",
+      "outcome": "ALLOW"
+    },
+    {
+      "kind": "backup_survivability",
+      "verdict": "AT_RISK"
+    }
+  ]
+}

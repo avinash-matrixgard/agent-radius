@@ -1,0 +1,32 @@
+{
+  "description": "Unversioned Terraform state bucket the agent can delete objects in.",
+  "expect": [
+    {
+      "kind": "state_bucket",
+      "resource": "arn:aws:s3:::acme-tfstate-prod",
+      "verdict": "AT_RISK",
+      "severity": "critical"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "s3:DeleteObject",
+      "resource": "arn:aws:s3:::acme-tfstate-prod/*",
+      "outcome": "ALLOW"
+    },
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:s3:::acme-tfstate-prod",
+      "verdict": "AT_RISK"
+    }
+  ],
+  "must_not": [
+    {
+      "kind": "destructive_permission",
+      "resource_contains": "acme-audit-logs"
+    },
+    {
+      "kind": "state_bucket",
+      "resource": "arn:aws:s3:::acme-audit-logs"
+    }
+  ]
+}

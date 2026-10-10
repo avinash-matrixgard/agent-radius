@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "account_id": "111122223333",
+  "regions": [
+    "us-east-1"
+  ],
+  "iam": {
+    "UserDetailList": [
+      {
+        "UserName": "ci-admin",
+        "UserId": "AIDA0992D0229D616D1C",
+        "Arn": "arn:aws:iam::111122223333:user/ci-admin",
+        "Path": "/",
+        "UserPolicyList": [],
+        "GroupList": [],
+        "AttachedManagedPolicies": [
+          {
+            "PolicyName": "AdministratorAccess",
+            "PolicyArn": "arn:aws:iam::aws:policy/AdministratorAccess"
+          }
+        ],
+        "Tags": []
+      }
+    ],
+    "GroupDetailList": [],
+    "RoleDetailList": [
+      {
+        "RoleName": "staging-deployer",
+        "RoleId": "AROA5BEA068732DA0B65",
+        "Arn": "arn:aws:iam::111122223333:role/staging-deployer",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111122223333:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "Read",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:Get*",
+                    "s3:List*"
+                  ],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "Tags": []
+      }
+    ],
+    "Policies": [
+      {
+        "PolicyName": "AdministratorAccess",
+        "PolicyId": "ANPABD08088C959D0EA3",
+        "Arn": "arn:aws:iam::aws:policy/AdministratorAccess",
+        "Path": "/",
+        "DefaultVersionId": "v1",
+        "AttachmentCount": 1,
+        "IsAttachable": true,
+        "PolicyVersionList": [
+          {
+            "Document": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": "*",
+                  "Resource": "*"
+                }
+              ]
+            },
+            "VersionId": "v1",
+            "IsDefaultVersion": true
+          }
+        ]
+      }
+    ]
+  },
+  "organization": null,
+  "resources": {
+    "rds_instances": [
+      {
+        "identifier": "prod-db",
+        "arn": "arn:aws:rds:us-east-1:111122223333:db:prod-db",
+        "engine": "postgres",
+        "deletion_protection": false,
+        "backup_retention_period": 7,
+        "kms_key_arn": null,
+        "tags": {
+          "env": "prod"
+        }
+      }
+    ]
+  },
+  "local_credentials": [],
+  "agent_principals": [],
+  "profile_principals": {
+    "staging": "arn:aws:iam::111122223333:role/staging-deployer"
+  },
+  "access_key_fingerprints": {
+    "6b26d1c60743a705": "arn:aws:iam::111122223333:user/ci-admin"
+  }
+}

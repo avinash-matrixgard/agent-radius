@@ -1,0 +1,34 @@
+{
+  "description": "A vault policy denies recovery point deletes. One agent can rewrite that policy first (two steps); the other cannot.",
+  "expect": [
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:rds:us-east-1:111122223333:db:prod-db",
+      "principal_contains": "role/agent-admin",
+      "verdict": "AT_RISK"
+    },
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:rds:us-east-1:111122223333:db:prod-db",
+      "principal_contains": "role/agent-ops",
+      "verdict": "SURVIVES"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "backup:PutBackupVaultAccessPolicy",
+      "principal_contains": "role/agent-admin",
+      "outcome": "ALLOW"
+    }
+  ],
+  "must_not": [
+    {
+      "kind": "destructive_permission",
+      "action": "backup:DeleteRecoveryPoint"
+    },
+    {
+      "kind": "backup_survivability",
+      "principal_contains": "role/agent-ops",
+      "verdict": "AT_RISK"
+    }
+  ]
+}

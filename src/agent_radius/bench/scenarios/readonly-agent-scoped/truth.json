@@ -1,0 +1,28 @@
+{
+  "description": "A properly scoped read-only role: nothing destructive should be reported (false-positive test).",
+  "expect": [
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:rds:us-east-1:111122223333:db:prod-db",
+      "verdict": "SURVIVES"
+    },
+    {
+      "kind": "local_credential",
+      "principal_contains": "role/agent-readonly"
+    }
+  ],
+  "must_not": [
+    {
+      "severity_at_least": "high"
+    },
+    {
+      "kind": "destructive_permission"
+    },
+    {
+      "verdict": "AT_RISK"
+    },
+    {
+      "verdict": "PARTIAL"
+    }
+  ]
+}

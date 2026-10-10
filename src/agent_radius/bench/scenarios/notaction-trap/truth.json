@@ -1,0 +1,36 @@
+{
+  "description": "A 'developer' policy written as NotAction iam:* quietly grants every non-IAM action, deletes included.",
+  "expect": [
+    {
+      "kind": "destructive_permission",
+      "action": "rds:DeleteDBInstance",
+      "resource": "arn:aws:rds:us-east-1:111122223333:db:prod-db",
+      "outcome": "ALLOW"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "s3:DeleteBucket",
+      "resource": "arn:aws:s3:::acme-prod-assets",
+      "outcome": "ALLOW"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "cloudtrail:StopLogging",
+      "outcome": "ALLOW"
+    }
+  ],
+  "must_not": [
+    {
+      "kind": "destructive_permission",
+      "action": "iam:DeleteRole"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "iam:AttachRolePolicy"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "organizations:LeaveOrganization"
+    }
+  ]
+}

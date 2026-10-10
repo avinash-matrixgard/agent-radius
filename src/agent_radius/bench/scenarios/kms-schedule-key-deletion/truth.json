@@ -1,0 +1,30 @@
+{
+  "description": "kms:ScheduleKeyDeletion on the key encrypting prod data; a second key's policy does not delegate to IAM.",
+  "expect": [
+    {
+      "kind": "destructive_permission",
+      "action": "kms:ScheduleKeyDeletion",
+      "resource": "arn:aws:kms:us-east-1:111122223333:key/1a2b3c4d-prod-data",
+      "outcome": "ALLOW",
+      "severity_at_least": "high"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "kms:ScheduleKeyDeletion",
+      "resource": "arn:aws:kms:us-east-1:111122223333:key/0a0b0c0d-aws-rds",
+      "effective": false
+    }
+  ],
+  "must_not": [
+    {
+      "kind": "destructive_permission",
+      "resource": "arn:aws:kms:us-east-1:111122223333:key/9f8e7d6c-payments"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "kms:ScheduleKeyDeletion",
+      "resource": "arn:aws:kms:us-east-1:111122223333:key/0a0b0c0d-aws-rds",
+      "effective": true
+    }
+  ]
+}

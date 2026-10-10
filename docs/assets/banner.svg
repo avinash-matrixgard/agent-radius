@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="360" viewBox="0 0 1280 360" role="img" aria-labelledby="t d" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+<title id="t">Agent Radius</title>
+<desc id="d">See what your AI coding agent could delete, before it does. Read-only. Open source. Multi-agent. Built by MatrixGard.</desc>
+<defs>
+<radialGradient id="glow" cx="1060" cy="190" r="260" gradientUnits="userSpaceOnUse">
+  <stop offset="0" stop-color="#FF8A3D" stop-opacity="0.22"/>
+  <stop offset="1" stop-color="#FF8A3D" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="fade" x1="560" y1="0" x2="900" y2="0" gradientUnits="userSpaceOnUse">
+  <stop offset="0" stop-color="#0A0A0B" stop-opacity="1"/>
+  <stop offset="1" stop-color="#0A0A0B" stop-opacity="0"/>
+</linearGradient>
+<radialGradient id="sweep" cx="1060" cy="190" r="330" gradientUnits="userSpaceOnUse">
+  <stop offset="0" stop-color="#FF8A3D" stop-opacity="0.30"/>
+  <stop offset="1" stop-color="#FF8A3D" stop-opacity="0"/>
+</radialGradient>
+</defs>
+<rect x="0" y="0" width="1280" height="360" fill="#0A0A0B"/>
+<circle cx="1060" cy="190" r="260" fill="url(#glow)"/>
+<path d="M1060,190 L1234.9,-89.9 A330,330 0 0 1 1361.5,55.8 Z" fill="url(#sweep)"/>
+<line x1="1060" y1="190" x2="1361.5" y2="55.8" stroke="#FF8A3D" stroke-width="1.5" stroke-opacity="0.55"/>
+<circle cx="1060" cy="190" r="30" fill="none" stroke="#FF8A3D" stroke-width="2" stroke-opacity="0.90"/>
+<circle cx="1060" cy="190" r="70" fill="none" stroke="#FF8A3D" stroke-width="2" stroke-opacity="0.79"/>
+<circle cx="1060" cy="190" r="112" fill="none" stroke="#FF8A3D" stroke-width="1.4" stroke-opacity="0.68"/>
+<circle cx="1060" cy="190" r="156" fill="none" stroke="#FF8A3D" stroke-width="1.4" stroke-opacity="0.57"/>
+<circle cx="1060" cy="190" r="202" fill="none" stroke="#FF8A3D" stroke-width="1.4" stroke-opacity="0.46"/>
+<circle cx="1060" cy="190" r="250" fill="none" stroke="#FF8A3D" stroke-width="1.4" stroke-opacity="0.35"/>
+<circle cx="1060" cy="190" r="300" fill="none" stroke="#FF8A3D" stroke-width="1.4" stroke-opacity="0.24"/>
+<circle cx="1060" cy="190" r="352" fill="none" stroke="#FF8A3D" stroke-width="1.4" stroke-opacity="0.13"/>
+<circle cx="1145.8" cy="118.0" r="5" fill="#F5C16C" fill-opacity="1.0"/>
+<circle cx="918.6" cy="124.1" r="4" fill="#FF8A3D" fill-opacity="0.8"/>
+<circle cx="1154.8" cy="368.4" r="4" fill="#F5C16C" fill-opacity="0.8"/>
+<circle cx="1015.0" cy="243.6" r="4" fill="#FF8A3D" fill-opacity="0.9"/>
+<circle cx="825.1" cy="275.5" r="3.5" fill="#FF8A3D" fill-opacity="0.55"/>
+<circle cx="1353.4" cy="127.6" r="3.5" fill="#F5C16C" fill-opacity="0.6"/>
+<circle cx="1060" cy="190" r="16" fill="none" stroke="#FF8A3D" stroke-width="2" stroke-opacity="0.6"/>
+<circle cx="1060" cy="190" r="8" fill="#FF8A3D"/>
+<rect x="0" y="0" width="900" height="360" fill="url(#fade)"/>
+<rect x="0" y="0" width="560" height="360" fill="#0A0A0B"/>
+<rect x="72" y="62" width="44" height="5" rx="2.5" fill="#FF8A3D"/>
+<text x="72" y="140" font-size="76" font-weight="800" fill="#FFFFFF" letter-spacing="-1.5">Agent Radius</text>
+<text x="72" y="198" font-size="31" font-weight="500" fill="#E5E7EB">See what your AI coding agent could delete,</text>
+<text x="72" y="238" font-size="31" font-weight="600" fill="#FF8A3D">before it does.</text>
+<text x="72" y="288" font-size="20" font-weight="600" fill="#D1D5DB" letter-spacing="0.3">Read-only. Open source. Multi-agent.</text>
+<rect x="72" y="318" width="8" height="8" rx="1.5" fill="#FF8A3D"/>
+<text x="90" y="327" font-size="15" font-weight="500" fill="#9CA3AF">Built by MatrixGard, matrixgard.com</text>
+</svg>

@@ -1,0 +1,83 @@
+{
+  "description": "An MCP config embeds static keys for an admin user; recon must report presence and path only, never values.",
+  "setup": {
+    "local_files": {
+      "~/.cursor/mcp.json": {
+        "mcpServers": {
+          "aws": {
+            "command": "uvx",
+            "args": [
+              "awslabs.aws-api-mcp-server@latest"
+            ],
+            "env": {
+              "AWS_ACCESS_KEY_ID": "AKIATESTFIXTUREXYZ12",
+              "AWS_SECRET_ACCESS_KEY": "TestFixture/SecretNotReal/00000000000001",
+              "AWS_REGION": "us-east-1"
+            }
+          }
+        }
+      },
+      "~/.aws/credentials": "[default]\naws_access_key_id = AKIATESTFIXTUREXYZ34\naws_secret_access_key = TestFixture/SecretNotReal/00000000000002\n",
+      "./.mcp.json": {
+        "mcpServers": {
+          "aws-staging": {
+            "command": "uvx",
+            "args": [
+              "awslabs.aws-api-mcp-server@latest"
+            ],
+            "env": {
+              "AWS_PROFILE": "staging"
+            }
+          }
+        }
+      }
+    },
+    "env": {
+      "AWS_PROFILE": "staging"
+    }
+  },
+  "expect": [
+    {
+      "kind": "local_credential",
+      "source_type": "mcp_config",
+      "path_contains": ".cursor/mcp.json",
+      "principal_contains": "user/ci-admin",
+      "severity": "high"
+    },
+    {
+      "kind": "local_credential",
+      "source_type": "aws_profile",
+      "path_contains": ".aws/credentials"
+    },
+    {
+      "kind": "local_credential",
+      "source_type": "mcp_config",
+      "path_contains": ".mcp.json",
+      "principal_contains": "role/staging-deployer"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "rds:DeleteDBInstance",
+      "principal_contains": "user/ci-admin",
+      "outcome": "ALLOW"
+    }
+  ],
+  "must_not": [
+    {
+      "output_contains": "TestFixture/SecretNotReal/00000000000001"
+    },
+    {
+      "output_contains": "AKIATESTFIXTUREXYZ12"
+    },
+    {
+      "output_contains": "TestFixture/SecretNotReal/00000000000002"
+    },
+    {
+      "output_contains": "AKIATESTFIXTUREXYZ34"
+    },
+    {
+      "kind": "destructive_permission",
+      "principal_contains": "role/staging-deployer"
+    }
+  ]
+}

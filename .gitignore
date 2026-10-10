@@ -1,0 +1,21 @@
+# Local virtualenv
+.venv/
+
+# Python build and cache
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+
+# Scan outputs (may describe a real account; keep them out of git)
+out/
+agent-radius-out/
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# OS noise
+.DS_Store

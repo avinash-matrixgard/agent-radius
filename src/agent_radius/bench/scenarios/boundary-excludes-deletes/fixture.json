@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "account_id": "111122223333",
+  "regions": [
+    "us-east-1"
+  ],
+  "iam": {
+    "UserDetailList": [],
+    "GroupDetailList": [],
+    "RoleDetailList": [
+      {
+        "RoleName": "agent-bounded",
+        "RoleId": "AROAF7F363C085B3D5FE",
+        "Arn": "arn:aws:iam::111122223333:role/agent-bounded",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111122223333:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [],
+        "AttachedManagedPolicies": [
+          {
+            "PolicyName": "AdministratorAccess",
+            "PolicyArn": "arn:aws:iam::aws:policy/AdministratorAccess"
+          }
+        ],
+        "Tags": [],
+        "PermissionsBoundary": {
+          "PermissionsBoundaryType": "Policy",
+          "PermissionsBoundaryArn": "arn:aws:iam::111122223333:policy/AgentBoundary"
+        }
+      }
+    ],
+    "Policies": [
+      {
+        "PolicyName": "AdministratorAccess",
+        "PolicyId": "ANPABD08088C959D0EA3",
+        "Arn": "arn:aws:iam::aws:policy/AdministratorAccess",
+        "Path": "/",
+        "DefaultVersionId": "v1",
+        "AttachmentCount": 1,
+        "IsAttachable": true,
+        "PolicyVersionList": [
+          {
+            "Document": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": "*",
+                  "Resource": "*"
+                }
+              ]
+            },
+            "VersionId": "v1",
+            "IsDefaultVersion": true
+          }
+        ]
+      },
+      {
+        "PolicyName": "AgentBoundary",
+        "PolicyId": "ANPAB3E9DFEB21F721C8",
+        "Arn": "arn:aws:iam::111122223333:policy/AgentBoundary",
+        "Path": "/",
+        "DefaultVersionId": "v1",
+        "AttachmentCount": 1,
+        "IsAttachable": true,
+        "PolicyVersionList": [
+          {
+            "Document": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:Get*",
+                    "s3:List*",
+                    "s3:Put*",
+                    "rds:Describe*",
+                    "dynamodb:Describe*",
+                    "dynamodb:Get*",
+                    "dynamodb:Query"
+                  ],
+                  "Resource": "*"
+                }
+              ]
+            },
+            "VersionId": "v1",
+            "IsDefaultVersion": true
+          }
+        ]
+      }
+    ]
+  },
+  "organization": null,
+  "resources": {
+    "rds_instances": [
+      {
+        "identifier": "prod-db",
+        "arn": "arn:aws:rds:us-east-1:111122223333:db:prod-db",
+        "engine": "postgres",
+        "deletion_protection": false,
+        "backup_retention_period": 7,
+        "kms_key_arn": null,
+        "tags": {
+          "env": "prod"
+        }
+      }
+    ],
+    "s3_buckets": [
+      {
+        "name": "acme-prod-data",
+        "region": "us-east-1",
+        "versioning": "Disabled",
+        "tags": {
+          "env": "prod"
+        }
+      }
+    ],
+    "dynamodb_tables": [
+      {
+        "name": "orders-prod",
+        "arn": "arn:aws:dynamodb:us-east-1:111122223333:table/orders-prod",
+        "deletion_protection": false,
+        "pitr_enabled": false,
+        "backups": [],
+        "tags": {}
+      }
+    ]
+  },
+  "local_credentials": [
+    {
+      "id": "cred:aws_profile:~/.aws/config#agent",
+      "source_type": "aws_profile",
+      "path": "~/.aws/config",
+      "profile_name": "agent",
+      "principal_arn": "arn:aws:iam::111122223333:role/agent-bounded",
+      "has_static_keys": false,
+      "key_names": [
+        "role_arn",
+        "source_profile"
+      ],
+      "detail": "source_profile=default"
+    }
+  ],
+  "agent_principals": [],
+  "profile_principals": {},
+  "access_key_fingerprints": {}
+}

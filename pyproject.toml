@@ -1,0 +1,82 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agent-radius"
+version = "0.1.0"
+description = "Read-only auditor: what could an AI coding agent destroy with the cloud credentials it inherits, would the backups survive, and what guardrail fixes it."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "AGPL-3.0-or-later"
+license-files = ["LICENSE"]
+authors = [{ name = "MatrixGard", email = "avinash@matrixgard.com" }]
+maintainers = [{ name = "MatrixGard", email = "avinash@matrixgard.com" }]
+keywords = [
+    "aws",
+    "iam",
+    "ai-agents",
+    "blast-radius",
+    "backup",
+    "devsecops",
+    "security",
+    "terraform",
+    "guardrails",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: System Administrators",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS :: MacOS X",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+    "Topic :: System :: Systems Administration",
+]
+dependencies = [
+    # boto3 is only imported by the live collector and the live recon
+    # mapping. Offline (fixture) scans never create a boto3 session.
+    "boto3>=1.34",
+]
+
+[project.optional-dependencies]
+# Optional LLM backend. The default backend ("none") needs nothing.
+anthropic = ["anthropic>=0.40"]
+dev = [
+    "pytest>=8.0",
+    "moto[iam,s3,sts,ec2,rds,dynamodb,kms,organizations]>=5.0",
+    "ruff>=0.4",
+    # Only used by scripts/render_demo_svg.py to draw docs/assets/demo.svg.
+    "rich>=13.0",
+]
+
+[project.urls]
+Homepage = "https://matrixgard.com"
+Repository = "https://github.com/avinash-matrixgard/agent-radius"
+"Security Policy" = "https://github.com/avinash-matrixgard/agent-radius/blob/main/SECURITY.md"
+Changelog = "https://github.com/avinash-matrixgard/agent-radius/blob/main/CHANGELOG.md"
+
+[project.scripts]
+agent-radius = "agent_radius.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agent_radius"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/agent_radius", "tests", "docs", "README.md", "SECURITY.md", "CHANGELOG.md", "LICENSE"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]

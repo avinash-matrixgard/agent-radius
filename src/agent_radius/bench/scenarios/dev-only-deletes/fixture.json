@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "account_id": "111122223333",
+  "regions": [
+    "us-east-1"
+  ],
+  "iam": {
+    "UserDetailList": [],
+    "GroupDetailList": [],
+    "RoleDetailList": [
+      {
+        "RoleName": "agent-dev",
+        "RoleId": "AROAE209FC9F687BB121",
+        "Arn": "arn:aws:iam::111122223333:role/agent-dev",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111122223333:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "DevDeletes",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "rds:DeleteDBInstance",
+                    "rds:DeleteDBSnapshot"
+                  ],
+                  "Resource": [
+                    "arn:aws:rds:*:*:db:dev-*",
+                    "arn:aws:rds:*:*:snapshot:dev-*"
+                  ]
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:DeleteObject",
+                    "s3:DeleteBucket"
+                  ],
+                  "Resource": [
+                    "arn:aws:s3:::dev-*",
+                    "arn:aws:s3:::dev-*/*"
+                  ]
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": "dynamodb:DeleteTable",
+                  "Resource": "arn:aws:dynamodb:us-east-1:111122223333:table/dev-*"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "rds:Describe*",
+                    "s3:List*",
+                    "dynamodb:Describe*"
+                  ],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "Tags": []
+      }
+    ],
+    "Policies": [
+      {
+        "PolicyName": "AdministratorAccess",
+        "PolicyId": "ANPABD08088C959D0EA3",
+        "Arn": "arn:aws:iam::aws:policy/AdministratorAccess",
+        "Path": "/",
+        "DefaultVersionId": "v1",
+        "AttachmentCount": 1,
+        "IsAttachable": true,
+        "PolicyVersionList": [
+          {
+            "Document": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": "*",
+                  "Resource": "*"
+                }
+              ]
+            },
+            "VersionId": "v1",
+            "IsDefaultVersion": true
+          }
+        ]
+      }
+    ]
+  },
+  "organization": null,
+  "resources": {
+    "rds_instances": [
+      {
+        "identifier": "dev-db",
+        "arn": "arn:aws:rds:us-east-1:111122223333:db:dev-db",
+        "engine": "postgres",
+        "deletion_protection": false,
+        "backup_retention_period": 1,
+        "kms_key_arn": null,
+        "tags": {}
+      },
+      {
+        "identifier": "prod-db",
+        "arn": "arn:aws:rds:us-east-1:111122223333:db:prod-db",
+        "engine": "postgres",
+        "deletion_protection": false,
+        "backup_retention_period": 7,
+        "kms_key_arn": null,
+        "tags": {
+          "env": "prod"
+        }
+      }
+    ],
+    "rds_snapshots": [
+      {
+        "identifier": "prod-db-nightly",
+        "arn": "arn:aws:rds:us-east-1:111122223333:snapshot:prod-db-nightly",
+        "source_identifier": "prod-db",
+        "source_kind": "instance",
+        "snapshot_type": "manual"
+      },
+      {
+        "identifier": "dev-db-nightly",
+        "arn": "arn:aws:rds:us-east-1:111122223333:snapshot:dev-db-nightly",
+        "source_identifier": "dev-db",
+        "source_kind": "instance",
+        "snapshot_type": "manual"
+      }
+    ],
+    "s3_buckets": [
+      {
+        "name": "dev-assets",
+        "region": "us-east-1",
+        "versioning": "Disabled",
+        "tags": {}
+      },
+      {
+        "name": "prod-assets",
+        "region": "us-east-1",
+        "versioning": "Disabled",
+        "tags": {
+          "env": "prod"
+        }
+      }
+    ],
+    "dynamodb_tables": [
+      {
+        "name": "dev-orders",
+        "arn": "arn:aws:dynamodb:us-east-1:111122223333:table/dev-orders",
+        "deletion_protection": false,
+        "pitr_enabled": false,
+        "backups": [],
+        "tags": {}
+      },
+      {
+        "name": "prod-orders",
+        "arn": "arn:aws:dynamodb:us-east-1:111122223333:table/prod-orders",
+        "deletion_protection": false,
+        "pitr_enabled": false,
+        "backups": [],
+        "tags": {
+          "env": "prod"
+        }
+      }
+    ]
+  },
+  "local_credentials": [
+    {
+      "id": "cred:aws_profile:~/.aws/config#agent",
+      "source_type": "aws_profile",
+      "path": "~/.aws/config",
+      "profile_name": "agent",
+      "principal_arn": "arn:aws:iam::111122223333:role/agent-dev",
+      "has_static_keys": false,
+      "key_names": [
+        "role_arn",
+        "source_profile"
+      ],
+      "detail": "source_profile=default"
+    }
+  ],
+  "agent_principals": [],
+  "profile_principals": {},
+  "access_key_fingerprints": {}
+}

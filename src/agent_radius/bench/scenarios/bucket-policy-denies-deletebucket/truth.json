@@ -1,0 +1,24 @@
+{
+  "description": "A bucket policy explicitly denies DeleteBucket; the agent can still empty it, or rewrite the policy.",
+  "expect": [
+    {
+      "kind": "destructive_permission",
+      "action": "s3:DeleteObject",
+      "resource": "arn:aws:s3:::acme-prod-media/*",
+      "outcome": "ALLOW"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "s3:PutBucketPolicy",
+      "resource": "arn:aws:s3:::acme-prod-media",
+      "outcome": "ALLOW"
+    }
+  ],
+  "must_not": [
+    {
+      "kind": "destructive_permission",
+      "action": "s3:DeleteBucket",
+      "resource": "arn:aws:s3:::acme-prod-media"
+    }
+  ]
+}

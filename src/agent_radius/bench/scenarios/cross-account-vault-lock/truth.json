@@ -1,0 +1,45 @@
+{
+  "description": "Admin agent can delete prod resources, but copies live in another account or in a compliance-locked vault.",
+  "expect": [
+    {
+      "kind": "destructive_permission",
+      "action": "rds:DeleteDBInstance",
+      "resource": "arn:aws:rds:us-east-1:111122223333:db:prod-db",
+      "outcome": "ALLOW"
+    },
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:rds:us-east-1:111122223333:db:prod-db",
+      "verdict": "SURVIVES"
+    },
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:dynamodb:us-east-1:111122223333:table/orders-prod",
+      "verdict": "SURVIVES"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "backup:DeleteRecoveryPoint",
+      "resource": "arn:aws:backup:us-east-1:111122223333:recovery-point:orders-prod-locked-1",
+      "effective": false
+    }
+  ],
+  "must_not": [
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:rds:us-east-1:111122223333:db:prod-db",
+      "verdict": "AT_RISK"
+    },
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:dynamodb:us-east-1:111122223333:table/orders-prod",
+      "verdict": "AT_RISK"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "backup:DeleteRecoveryPoint",
+      "resource": "arn:aws:backup:us-east-1:111122223333:recovery-point:orders-prod-locked-1",
+      "effective": true
+    }
+  ]
+}

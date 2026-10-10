@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "account_id": "111122223333",
+  "regions": [
+    "us-east-1"
+  ],
+  "iam": {
+    "UserDetailList": [],
+    "GroupDetailList": [],
+    "RoleDetailList": [
+      {
+        "RoleName": "agent-admin",
+        "RoleId": "AROAB25A51D956B03D78",
+        "Arn": "arn:aws:iam::111122223333:role/agent-admin",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111122223333:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [],
+        "AttachedManagedPolicies": [
+          {
+            "PolicyName": "AdministratorAccess",
+            "PolicyArn": "arn:aws:iam::aws:policy/AdministratorAccess"
+          }
+        ],
+        "Tags": []
+      },
+      {
+        "RoleName": "agent-ops",
+        "RoleId": "AROAD515DA910984E8D9",
+        "Arn": "arn:aws:iam::111122223333:role/agent-ops",
+        "Path": "/",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::111122223333:root"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "RolePolicyList": [
+          {
+            "PolicyName": "Ops",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "rds:*",
+                    "backup:DeleteRecoveryPoint",
+                    "backup:UpdateRecoveryPointLifecycle",
+                    "backup:List*"
+                  ],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ],
+        "AttachedManagedPolicies": [],
+        "Tags": []
+      }
+    ],
+    "Policies": [
+      {
+        "PolicyName": "AdministratorAccess",
+        "PolicyId": "ANPABD08088C959D0EA3",
+        "Arn": "arn:aws:iam::aws:policy/AdministratorAccess",
+        "Path": "/",
+        "DefaultVersionId": "v1",
+        "AttachmentCount": 1,
+        "IsAttachable": true,
+        "PolicyVersionList": [
+          {
+            "Document": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": "*",
+                  "Resource": "*"
+                }
+              ]
+            },
+            "VersionId": "v1",
+            "IsDefaultVersion": true
+          }
+        ]
+      }
+    ]
+  },
+  "organization": null,
+  "resources": {
+    "rds_instances": [
+      {
+        "identifier": "prod-db",
+        "arn": "arn:aws:rds:us-east-1:111122223333:db:prod-db",
+        "engine": "postgres",
+        "deletion_protection": false,
+        "backup_retention_period": 0,
+        "kms_key_arn": null,
+        "tags": {
+          "env": "prod"
+        }
+      }
+    ],
+    "backup_vaults": [
+      {
+        "name": "protected",
+        "arn": "arn:aws:backup:us-east-1:111122223333:backup-vault:protected",
+        "access_policy": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "ProtectRecoveryPoints",
+              "Effect": "Deny",
+              "Principal": "*",
+              "Action": [
+                "backup:DeleteRecoveryPoint",
+                "backup:UpdateRecoveryPointLifecycle"
+              ],
+              "Resource": "*"
+            }
+          ]
+        },
+        "lock_mode": null,
+        "lock_immutable": false
+      }
+    ],
+    "recovery_points": [
+      {
+        "arn": "arn:aws:backup:us-east-1:111122223333:recovery-point:prod-db-protected-1",
+        "vault_arn": "arn:aws:backup:us-east-1:111122223333:backup-vault:protected",
+        "source_resource_arn": "arn:aws:rds:us-east-1:111122223333:db:prod-db",
+        "resource_type": "RDS",
+        "observed_via": "fixture"
+      }
+    ]
+  },
+  "local_credentials": [
+    {
+      "id": "cred:aws_profile:~/.aws/config#admin",
+      "source_type": "aws_profile",
+      "path": "~/.aws/config",
+      "profile_name": "admin",
+      "principal_arn": "arn:aws:iam::111122223333:role/agent-admin",
+      "has_static_keys": false,
+      "key_names": [
+        "role_arn",
+        "source_profile"
+      ],
+      "detail": "source_profile=default"
+    },
+    {
+      "id": "cred:aws_profile:~/.aws/config#ops",
+      "source_type": "aws_profile",
+      "path": "~/.aws/config",
+      "profile_name": "ops",
+      "principal_arn": "arn:aws:iam::111122223333:role/agent-ops",
+      "has_static_keys": false,
+      "key_names": [
+        "role_arn",
+        "source_profile"
+      ],
+      "detail": "source_profile=default"
+    }
+  ],
+  "agent_principals": [],
+  "profile_principals": {},
+  "access_key_fingerprints": {}
+}

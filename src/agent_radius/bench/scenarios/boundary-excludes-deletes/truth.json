@@ -1,0 +1,45 @@
+{
+  "description": "AdministratorAccess capped by a permissions boundary that excludes every delete (but allows s3:Put*).",
+  "expect": [
+    {
+      "kind": "destructive_permission",
+      "action": "s3:PutLifecycleConfiguration",
+      "resource": "arn:aws:s3:::acme-prod-data",
+      "outcome": "ALLOW"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "s3:PutBucketPolicy",
+      "resource": "arn:aws:s3:::acme-prod-data",
+      "outcome": "ALLOW"
+    },
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:s3:::acme-prod-data",
+      "verdict": "AT_RISK"
+    },
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:rds:us-east-1:111122223333:db:prod-db",
+      "verdict": "SURVIVES"
+    }
+  ],
+  "must_not": [
+    {
+      "kind": "destructive_permission",
+      "action": "rds:DeleteDBInstance"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "s3:DeleteObject"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "dynamodb:DeleteTable"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "iam:AttachRolePolicy"
+    }
+  ]
+}

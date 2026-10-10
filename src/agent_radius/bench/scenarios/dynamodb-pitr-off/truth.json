@@ -1,0 +1,30 @@
+{
+  "description": "DynamoDB with PITR off and deletion protection off; a second table has a cross-account copy.",
+  "expect": [
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:dynamodb:us-east-1:111122223333:table/orders-prod",
+      "verdict": "AT_RISK",
+      "severity": "critical"
+    },
+    {
+      "kind": "destructive_permission",
+      "action": "dynamodb:DeleteTable",
+      "resource": "arn:aws:dynamodb:us-east-1:111122223333:table/orders-prod",
+      "outcome": "ALLOW",
+      "severity": "critical"
+    },
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:dynamodb:us-east-1:111122223333:table/users-prod",
+      "verdict": "SURVIVES"
+    }
+  ],
+  "must_not": [
+    {
+      "kind": "backup_survivability",
+      "resource": "arn:aws:dynamodb:us-east-1:111122223333:table/users-prod",
+      "verdict": "AT_RISK"
+    }
+  ]
+}
